@@ -1,0 +1,37 @@
+package handlers
+
+import (
+    {{ if .IsResource }}
+    "net/http"
+    {{ end }}
+)
+
+type {{ .Name }}Handler struct {
+
+}
+
+func (c *{{ .Name}}Handler) Init{{ .Name}}Handler() {
+
+}
+
+{{ if .IsResource }}
+
+func (c *{{ .Name}}Handler) Index(w http.ResponseWriter, r *http.Request) {
+
+}
+
+
+func (c *{{ .Name}}Handler) Store(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func (c *{{ .Name}}Handler) Update(w http.ResponseWriter, r *http.Request) {
+
+}
+
+
+func (c *{{ .Name}}Handler) Delete(w http.ResponseWriter, r *http.Request) {
+
+}
+
+{{ end }}

@@ -1,0 +1,11 @@
+package request
+
+type {{ .Request }} struct {
+    ID uint `json:"id"`
+}
+
+func New{{ .Request}}Request() *{{ .Request }} {
+    return &{{ .Request }} {
+
+    }
+}
