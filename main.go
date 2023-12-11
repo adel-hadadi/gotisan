@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	commands2 "github.com/adel-hadadi/tisan/commands"
 	"github.com/adel-hadadi/tisan/commands/handler"
 	"github.com/adel-hadadi/tisan/commands/model"
@@ -28,7 +27,6 @@ func main() {
 		log.Fatalf("object %s is not valid", commands[structure[0]])
 		return
 	}
-	fmt.Println(object)
 	mName := strcase.ToCamel(strings.ToLower(structure[1]))
 	method := object.MethodByName(mName)
 
