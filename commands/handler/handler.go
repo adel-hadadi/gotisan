@@ -2,7 +2,7 @@ package handler
 
 import (
 	"fmt"
-	"github.com/adel-hadadi/tisan/constant"
+	"github.com/adel-hadadi/tisan/config"
 	"github.com/iancoleman/strcase"
 	"html/template"
 	"log"
@@ -17,14 +17,11 @@ const (
 	EnterHandlerName = "please enter handler name \n \t example: handler:make [HANDLER_NAME]"
 )
 
-func (h *HandlerCommand) Make(args []string) {
-	if len(args) == 0 {
-		fmt.Println(EnterHandlerName)
-	}
+func (h *HandlerCommand) Make(path string, cfg *config.Config) {
+	nestedDir := strings.Split(path, "/")
 
-	path := strings.Split(args[0], "/")
 	if len(path) > 1 {
-		nestedDir := path[:len(path)-1]
+		nestedDir = nestedDir[:len(nestedDir)-1]
 		err := os.MkdirAll(strings.Join(nestedDir, "/"), os.ModePerm)
 		if err != nil {
 			fmt.Println("error according create folders")
@@ -32,25 +29,26 @@ func (h *HandlerCommand) Make(args []string) {
 		}
 	}
 
-	fName := path[len(path)-1]
+	fName := nestedDir[len(nestedDir)-1]
 	data := map[string]interface{}{
 		"Name":       strcase.ToCamel(fName),
 		"IsResource": false,
 	}
 
-	for _, a := range args[1:] {
-		if a == "-r" || a == "--resource" {
-			data["IsResource"] = true
-		}
-	}
+	// todo: check args
+	//for _, a := range args[1:] {
+	//	if a == "-r" || a == "--resource" {
+	//		data["IsResource"] = true
+	//	}
+	//}
 
-	tmpl, err := template.ParseFiles(constant.TemplateDirectory + constant.HandlerTemplate)
+	tmpl, err := template.ParseFiles(cfg.Template.Directory + cfg.Template.Handler)
 	if err != nil {
 		log.Fatal(err.Error())
 		return
 	}
 
-	file, _ := os.Create(fmt.Sprintf("%s.go", args[0]))
+	file, _ := os.Create(fmt.Sprintf("%s.go", fName))
 	defer file.Close()
 
 	err = tmpl.Execute(file, data)
