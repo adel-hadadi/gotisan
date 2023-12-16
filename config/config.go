@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	Template Template
+	TemplateDirectory string
 }
 
 type Template struct {
@@ -35,4 +35,10 @@ func InitConfig() (*Config, error) {
 	}
 
 	return &config, nil
+}
+
+func NewDefaultConfig() *Config {
+	return &Config{
+		TemplateDirectory: "./templates",
+	}
 }

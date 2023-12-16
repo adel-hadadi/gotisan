@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/adel-hadadi/tisan/config"
+	"github.com/adel-hadadi/gotisan/config"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -16,18 +16,13 @@ var cfgFile *config.Config
 var rootCmd = &cobra.Command{
 	Use:   "gotisan",
 	Short: "an cmd tool for make programming more enjoyable",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Long:  "\n   ______      __  _                \n  / ____/___  / /_(_)________ _____ \n / / __/ __ \\/ __/ / ___/ __ `/ __ \\\n/ /_/ / /_/ / /_/ (__  ) /_/ / / / /\n\\____/\\____/\\__/_/____/\\__,_/_/ /_/ \n                                    \n",
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
+// Execute adds all child services to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
@@ -51,8 +46,8 @@ func init() {
 }
 
 func initConfig() {
-	cfg, err := config.InitConfig()
-	cobra.CheckErr(err)
-
-	cfgFile = cfg
+	//cfg, err := config.InitConfig()
+	//cobra.CheckErr(err)
+	//
+	//cfgFile = cfg
 }

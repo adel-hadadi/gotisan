@@ -1,4 +1,4 @@
-module github.com/adel-hadadi/tisan
+module github.com/adel-hadadi/gotisan
 
 go 1.21.4
 

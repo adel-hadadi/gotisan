@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -8,21 +5,36 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var modelCmd = &cobra.Command{
-	Use:   "make:model [name]",
-	Short: "make model",
+var IsRestful bool = false
+var createModel bool = false
+
+var handlerCmd = &cobra.Command{
+	Use:   "make:handler [name]",
+	Short: "make handler",
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
-		service := services.ModelCommand{
+		service := services.HandlerCommand{
 			Destination: args[0],
+			Options: services.HandlerOptions{
+				IsRestful:   IsRestful,
+				CreateModel: createModel,
+			},
 		}
 
-		service.Make(cfgFile)
+		service.Make()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(modelCmd)
+	handlerCmd.Flags().BoolVarP(
+		&IsRestful,
+		"restful",
+		"r",
+		false,
+		"create restfull handler",
+	)
+
+	rootCmd.AddCommand(handlerCmd)
 
 	// Here you will define your flags and configuration settings.
 

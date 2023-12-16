@@ -1,39 +1,9 @@
 package main
 
 import (
-	"github.com/adel-hadadi/tisan/cmd"
+	"github.com/adel-hadadi/gotisan/cmd"
 )
-
-//var commands map[string]commands2.Command = map[string]commands2.Command{
-//	"model":   &model.ModelCommand{},
-//	"handler": &handler.HandlerCommand{},
-//	"request": &request.RequestCommand{},
-//}
 
 func main() {
 	cmd.Execute()
-
-	//r := os.Args[1]
-	//structure := strings.Split(r, ":")
-	//
-	//object := reflect.ValueOf(commands[structure[0]])
-	//if !object.IsValid() {
-	//	log.Fatalf("object %s is not valid", commands[structure[0]])
-	//	return
-	//}
-	//mName := strcase.ToCamel(strings.ToLower(structure[1]))
-	//method := object.MethodByName(mName)
-	//
-	//if !method.IsValid() {
-	//	log.Fatalf("method %s not found", mName)
-	//	return
-	//}
-	//
-	//fn, ok := method.Interface().(func([]string))
-	//if !ok {
-	//	log.Fatal("something went wrong")
-	//	return
-	//}
-	//
-	//fn(os.Args[2:])
 }

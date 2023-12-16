@@ -1,8 +1,8 @@
-package model
+package services
 
 import (
 	"fmt"
-	"github.com/adel-hadadi/tisan/constant"
+	"github.com/adel-hadadi/gotisan/config"
 	"github.com/iancoleman/strcase"
 	"html/template"
 	"log"
@@ -11,19 +11,16 @@ import (
 )
 
 type ModelCommand struct {
+	Destination  string
+	ModelOptions ModelOptions
 }
 
-const (
-	EnterModelName = "please enter model name \n \t example: model:make [MODEL_NAME]"
-)
+type ModelOptions struct {
+}
 
-func (c *ModelCommand) Make(args []string) {
-	if len(args) == 0 {
-		fmt.Println(EnterModelName)
-		return
-	}
+func (c *ModelCommand) Make(cfg *config.Config) {
+	path := strings.Split(c.Destination, "/")
 
-	path := strings.Split(args[0], "/")
 	if len(path) > 1 {
 		nestedDir := path[:len(path)-1]
 		err := os.MkdirAll(strings.Join(nestedDir, "/"), os.ModePerm)
@@ -38,13 +35,16 @@ func (c *ModelCommand) Make(args []string) {
 		"Model": strcase.ToCamel(fName),
 	}
 
-	tmpl, err := template.ParseFiles(constant.TemplateDirectory + constant.ModelTemplate)
+	tmpl, err := template.ParseFiles(templatesBasePath + "model.tmpl")
 	if err != nil {
 		log.Fatal(err.Error())
 		return
 	}
 
-	file, _ := os.Create(fmt.Sprintf("%s.go", args[0]))
+	file, err := MakeFile(c.Destination)
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer file.Close()
 
 	err = tmpl.Execute(file, data)
@@ -52,8 +52,6 @@ func (c *ModelCommand) Make(args []string) {
 		log.Fatal(err.Error())
 		return
 	}
-}
 
-func (c *ModelCommand) Help(args []string) {
-
+	fmt.Println("model create successfully :)")
 }
