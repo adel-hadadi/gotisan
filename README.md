@@ -88,3 +88,22 @@ func (c *UserHandler) Delete(w http.ResponseWriter, r *http.Request) {
 ```
 
 ## Make Model
+``` bash
+gotisan make:model [name]
+```
+the above command just create a simple model with defualt structure that contain common use fields:
+
+``` go
+package models
+
+import (
+    "time"
+)
+
+type Car struct {
+    ID uint
+    CreatedAt time.Duration
+    UpdatedAt time.Duration
+    DeletedAt time.Duration
+}
+```
