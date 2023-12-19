@@ -2,7 +2,7 @@
 
 # Gotisan
 
-gotisan is the command line interface inspider by laravel artisan for your golang projects that give you flexibility to have your customer file structures.
+gotisan is the command line interface inspired by laravel artisan for your golang projects that give you flexibility to have your custom file structures.
 
 
 ## Why should use this package?
@@ -12,7 +12,7 @@ gotisan is the command line interface inspider by laravel artisan for your golan
 
 ## Installation
 
-can easly install this package in your local machine and use it in your golang projects. for installing this package just run below command in your terminal.
+you can easily install this package globally in your local machine and use it in your golang projects. for installing this package just run below command in your terminal.
 
 ```bash
   go install github.com/adel-hadadi/gotisan
@@ -24,7 +24,7 @@ to start using this package in our project just should go in your root directory
 ``` bash
 gotisan init 
 ```
-this command will create a `.gotisan` folder in your root direcoty that contain template files. if you using git in your project, gotisan will add .gotisan folder in .gitignore file.
+this command will create a `.gotisan` folder in your root directory that contain template files. if you're using git in your project, gotisan will add .gotisan folder in .gitignore file.
 
 
 #### Make Handler
@@ -44,7 +44,7 @@ func (c *UserHandler) InitUserHandler() {
 
 }
 ``` 
-but if you want a customer handler structure just go in `.gotisan/templates/handler.tmp` and customize to what you want.
+but if you want a custom handler structure just go in `.gotisan/templates/handler.tmp` and customize to what you want.
 
 by passing `-r` or `--restful` to `make:handler` command, package will create a restful handler with CRUD methods.
 
@@ -91,7 +91,7 @@ func (c *UserHandler) Delete(w http.ResponseWriter, r *http.Request) {
 ``` bash
 gotisan make:model [name]
 ```
-the above command just create a simple model with defualt structure that contain common use fields:
+the above command just create a simple model with default structure that contain common use fields:
 
 ``` go
 package models
