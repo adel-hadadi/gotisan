@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/adel-hadadi/gotisan/config"
 	"github.com/spf13/cobra"
 	"log"
@@ -9,7 +10,7 @@ import (
 
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "to initialize gotisan config and templates",
+	Short: "to initialize Gotisan config and templates",
 	Run: func(cmd *cobra.Command, args []string) {
 		wd, err := os.Getwd()
 		if err != nil {
@@ -29,6 +30,8 @@ var initCmd = &cobra.Command{
 		}
 
 		config.NewDefaultConfig()
+
+		fmt.Println("Lets hack Nasa 🙂")
 	},
 }
 
