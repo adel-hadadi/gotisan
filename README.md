@@ -40,7 +40,7 @@ type UserHandler struct {
 
 }
 
-func (c *UserHandler) InitUserHandler() {
+func InitUserHandler() *UserHandler {
 
 }
 ``` 
@@ -61,7 +61,7 @@ type UserHandler struct {
 
 }
 
-func (c *UserHandler) InitUserHandler() {
+func InitUserHandler() *UserHandler {
 
 }
 
@@ -105,5 +105,29 @@ type Car struct {
     CreatedAt time.Duration
     UpdatedAt time.Duration
     DeletedAt time.Duration
+}
+```
+
+## Make DTO
+
+``` bash 
+gotisan make:dto [name]
+```
+make dto command will create request and response objects. below example is for profile dto:
+```go
+package dtos
+
+type ProfileReq struct {
+}
+
+type ProfileRes struct {
+}
+
+func NewProfileReq(data interface{}) *ProfileReq {
+	return &ProfileReq{}
+}
+
+func NewProfileRes(data interface{}) *ProfileRes {
+	return &ProfileRes{}
 }
 ```
