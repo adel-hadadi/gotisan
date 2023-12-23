@@ -10,6 +10,7 @@ import (
 var templates map[string]string = map[string]string{
 	"handler": constant.HandlerSample,
 	"model":   constant.ModelSample,
+	"dto":     constant.DTOSample,
 }
 
 func copyTemplateFiles() error {
