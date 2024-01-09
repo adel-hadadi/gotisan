@@ -1,8 +1,11 @@
 package services
 
 import (
+	"errors"
 	"fmt"
+	"github.com/adel-hadadi/gotisan/constant"
 	"os"
+	"strings"
 )
 
 const templatesBasePath = ".gotisan/templates/"
@@ -19,4 +22,22 @@ func MakeFile(destination string) (*os.File, error) {
 	}
 
 	return file, nil
+}
+
+func checkFileExists(path string) bool {
+	_, err := os.Stat(path + ".go")
+	if errors.Is(err, os.ErrNotExist) {
+		return false
+	}
+	return true
+}
+
+func createNestedFolder(path []string) error {
+	nestedDir := path[:len(path)-1]
+	err := os.MkdirAll(strings.Join(nestedDir, "/"), os.ModePerm)
+	if err != nil {
+		return errors.New(constant.ErrAccordingCreateFolder)
+	}
+
+	return nil
 }
