@@ -59,11 +59,11 @@ type {{ .Name }}Req struct {
 type {{ .Name }}Res struct {
 }
 
-func New{{ .Name }}Req(data interface{}) *UserReq {
-	return &UserReq{}
+func New{{ .Name }}Req(data interface{}) *{{ .Name }}Req {
+	return &{{ .Name }}Req{}
 }
 
-func New{{ .Name }}Res(data interface{}) *UserRes {
-	return &UserRes{}
+func New{{ .Name }}Res(data interface{}) *{{ .Name }}Res {
+	return &{{ .Name }}Res{}
 }`
 )

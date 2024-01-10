@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"github.com/adel-hadadi/gotisan/constant"
 	"github.com/iancoleman/strcase"
 	"html/template"
 	"log"
@@ -18,14 +19,18 @@ type DTOOptions struct {
 }
 
 func (h *DTOCommand) Make() {
+	if checkFileExists(h.Destination) {
+		fmt.Println(constant.ErrFileAlreadyExists)
+		return
+	}
+
 	nestedDir := strings.Split(h.Destination, "/")
 
 	fName := nestedDir[len(nestedDir)-1]
 	if len(nestedDir) > 1 {
-		nestedDir = nestedDir[:len(nestedDir)-1]
-		err := os.MkdirAll(strings.Join(nestedDir, "/"), os.ModePerm)
+		err := createNestedFolder(nestedDir)
 		if err != nil {
-			fmt.Println("error according create folders")
+			fmt.Println(err.Error())
 			return
 		}
 	}

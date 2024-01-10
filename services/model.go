@@ -3,10 +3,10 @@ package services
 import (
 	"fmt"
 	"github.com/adel-hadadi/gotisan/config"
+	"github.com/adel-hadadi/gotisan/constant"
 	"github.com/iancoleman/strcase"
 	"html/template"
 	"log"
-	"os"
 	"strings"
 )
 
@@ -19,13 +19,17 @@ type ModelOptions struct {
 }
 
 func (c *ModelCommand) Make(cfg *config.Config) {
+	if checkFileExists(c.Destination) {
+		fmt.Println(constant.ErrFileAlreadyExists)
+		return
+	}
+
 	path := strings.Split(c.Destination, "/")
 
 	if len(path) > 1 {
-		nestedDir := path[:len(path)-1]
-		err := os.MkdirAll(strings.Join(nestedDir, "/"), os.ModePerm)
+		err := createNestedFolder(path)
 		if err != nil {
-			fmt.Println("error according create folders")
+			fmt.Println(err.Error())
 			return
 		}
 	}
