@@ -5,8 +5,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var IsRestful bool = false
-var createModel bool = false
+var (
+	IsRestful   bool = false
+	createModel bool = false
+)
 
 var handlerCmd = &cobra.Command{
 	Use:   "make:handler [name]",

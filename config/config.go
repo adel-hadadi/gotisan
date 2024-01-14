@@ -1,13 +1,13 @@
 package config
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-	"os"
+	"fmt"
+	"slices"
 )
 
 type Config struct {
 	TemplateDirectory string
+	Framework         string
 }
 
 type Template struct {
@@ -15,30 +15,21 @@ type Template struct {
 	Handler   string
 }
 
-func InitConfig() (*Config, error) {
-	// Find home directory.
-	home, err := os.UserHomeDir()
-	cobra.CheckErr(err)
+var ErrNotAllowedFramework = "%s is not allowed framework"
 
-	// Search config in home directory with name ".gotisan" (without extension).
-	viper.AddConfigPath(home)
-	viper.SetConfigName(".gotisan")
-	viper.SetConfigType("yml")
-
-	if err := viper.ReadInConfig(); err != nil {
-		panic(err)
-	}
-
-	var config Config
-	if err := viper.Unmarshal(&config); err != nil {
-		return nil, err
-	}
-
-	return &config, nil
+var AllowedFrameworks []string = []string{
+	"echo",
+	"gin",
+	"fiber",
 }
 
-func NewDefaultConfig() *Config {
+func NewDefaultConfig(framework string) (*Config, error) {
+	if !slices.Contains(AllowedFrameworks, framework) {
+		return &Config{}, fmt.Errorf(ErrNotAllowedFramework, framework)
+	}
+
 	return &Config{
 		TemplateDirectory: "./templates",
-	}
+		Framework:         framework,
+	}, nil
 }

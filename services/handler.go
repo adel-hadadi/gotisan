@@ -48,7 +48,7 @@ func (h *HandlerCommand) Make() {
 		return
 	}
 
-	file, err := os.Create(fmt.Sprintf("%s.go", h.Destination))
+	file, err := os.Create(fmt.Sprintf("%s_handler.go", h.Destination))
 	if err != nil {
 		log.Fatal(err)
 		return
