@@ -46,7 +46,7 @@ func init() {
 		&framework,
 		"framework",
 		"",
-		"create handlers with framework context",
+		"enter framework to create handlers with framework context",
 	)
 
 	rootCmd.AddCommand(initCmd)

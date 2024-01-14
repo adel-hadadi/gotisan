@@ -24,7 +24,7 @@ var AllowedFrameworks []string = []string{
 }
 
 func NewDefaultConfig(framework string) (*Config, error) {
-	if !slices.Contains(AllowedFrameworks, framework) {
+	if framework != "" && !slices.Contains(AllowedFrameworks, framework) {
 		return &Config{}, fmt.Errorf(ErrNotAllowedFramework, framework)
 	}
 
