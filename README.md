@@ -19,13 +19,51 @@ you can easily install this package globally in your local machine and use it in
 ```
 
 ## Usage
-to start using this package in our project just should go in your root directory of project and first of all run `init` command.
+to start using this package in your project just should go in your root directory of project and first of all run `init` command.
 
 ``` bash
 gotisan init 
 ```
 this command will create a `.gotisan` folder in your root directory that contain template files. if you're using git in your project, gotisan will add .gotisan folder in .gitignore file.
 
+optionally can set framework to one of the `gin`, `echo` or `fiber` to set default context of handlers:
+
+```shell
+gotisan init --framework=echo
+```
+
+then if create a restful handler with `make:handler` command with `--restful` flag you`ll see a handler file with structure like this:
+```go
+package handlers
+
+import (
+	"github.com/labstack/echo/v4"
+	"net/http"
+)
+
+type AuthHandler struct {
+}
+
+func NewAuthHandler() *AuthHandler {
+	return &AuthHandler{}
+}
+
+func (a *AuthHandler) Index(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, interface{})
+}
+
+func (a *AuthHandler) Store(ctx echo,Context) error {
+	return ctx.JSON(http.StatusCreated, interface{})
+}
+
+func (a *AuthHandler) Update(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, interface{})
+}
+
+func (a *AuthHandler) Delete(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, interface{})
+}
+```
 
 #### Make Handler
 ``` bash
