@@ -5,8 +5,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var IsRestful bool = false
-var createModel bool = false
+var (
+	isRestful   bool = false
+	createModel bool = false
+)
 
 var handlerCmd = &cobra.Command{
 	Use:   "make:handler [name]",
@@ -16,7 +18,7 @@ var handlerCmd = &cobra.Command{
 		service := services.HandlerCommand{
 			Destination: args[0],
 			Options: services.HandlerOptions{
-				IsRestful:   IsRestful,
+				IsRestful:   isRestful,
 				CreateModel: createModel,
 			},
 		}
@@ -27,7 +29,7 @@ var handlerCmd = &cobra.Command{
 
 func init() {
 	handlerCmd.Flags().BoolVarP(
-		&IsRestful,
+		&isRestful,
 		"restful",
 		"r",
 		false,

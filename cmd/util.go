@@ -3,17 +3,30 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"github.com/adel-hadadi/gotisan/config"
 	"github.com/adel-hadadi/gotisan/constant"
 	"os"
 )
 
-var templates map[string]string = map[string]string{
-	"handler": constant.HandlerSample,
-	"model":   constant.ModelSample,
-	"dto":     constant.DTOSample,
-}
+var (
+	templates map[string]string = map[string]string{
+		"handler": constant.HandlerSample,
+		"model":   constant.ModelSample,
+		"dto":     constant.DTOSample,
+	}
 
-func copyTemplateFiles() error {
+	frameworkHandlers map[string]string = map[string]string{
+		"gin":   constant.GinHandlerSample,
+		"echo":  constant.EchoHandlerSample,
+		"fiber": constant.FiberHandlerSample,
+	}
+)
+
+func copyTemplateFiles(cfg *config.Config) error {
+	if cfg.Framework != "" {
+		templates["handler"] = frameworkHandlers[cfg.Framework]
+	}
+
 	for k, v := range templates {
 		file, err := os.Create(fmt.Sprintf(".gotisan/templates/%s.tmpl", k))
 		if err != nil {

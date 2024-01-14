@@ -1,44 +1,6 @@
 package constant
 
 const (
-	HandlerSample = `package handlers
-
-import (
-{{ if .IsRestful }}
-"net/http"
-{{ end }}
-)
-
-type {{ .Name }}Handler struct {
-
-}
-
-func Init{{ .Name}}Handler() *{{ .Name }}Handler {
-	return &{{ .Name }}Handler{}
-}
-
-{{ if .IsRestful }}
-
-func (c *{{ .Name}}Handler) Index(w http.ResponseWriter, r *http.Request) {
-
-}
-
-
-func (c *{{ .Name}}Handler) Store(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func (c *{{ .Name}}Handler) Update(w http.ResponseWriter, r *http.Request) {
-
-}
-
-
-func (c *{{ .Name}}Handler) Delete(w http.ResponseWriter, r *http.Request) {
-
-}
-
-{{ end }}`
-
 	ModelSample = `package models
 
 import (
