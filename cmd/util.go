@@ -23,7 +23,7 @@ var (
 )
 
 func copyTemplateFiles(cfg *config.Config) error {
-	if cfg.Framework != "" {
+	if cfg.Framework != "none" {
 		templates["handler"] = frameworkHandlers[cfg.Framework]
 	}
 

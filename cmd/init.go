@@ -21,7 +21,7 @@ var initCmd = &cobra.Command{
 
 		prompt := promptui.Select{
 			Label: promptSelectFrameworkMsg,
-			Items: config.AllowedFrameworks,
+			Items: config.Frameworks,
 		}
 
 		_, framework, err := prompt.Run()
@@ -30,7 +30,7 @@ var initCmd = &cobra.Command{
 			return
 		}
 
-		cfg, err := config.NewDefaultConfig(framework)
+		cfg, err := config.NewConfig(framework)
 		if err != nil {
 			log.Fatal(err)
 			return
