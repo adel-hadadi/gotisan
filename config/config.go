@@ -15,9 +15,10 @@ type Template struct {
 	Handler   string
 }
 
+// ErrNotAllowedFramework error message that occurred when chosen framework not accepted
 var ErrNotAllowedFramework = "%s is not allowed framework"
 
-var AllowedFrameworks []string = []string{
+var AllowedFrameworks = []string{
 	"echo",
 	"gin",
 	"fiber",
