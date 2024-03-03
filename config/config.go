@@ -18,14 +18,16 @@ type Template struct {
 // ErrNotAllowedFramework error message that occurred when chosen framework not accepted
 var ErrNotAllowedFramework = "%s is not allowed framework"
 
-var AllowedFrameworks = []string{
+// Frameworks list of supported frameworks
+var Frameworks = []string{
+	"none",
 	"echo",
 	"gin",
 	"fiber",
 }
 
-func NewDefaultConfig(framework string) (*Config, error) {
-	if framework != "" && !slices.Contains(AllowedFrameworks, framework) {
+func NewConfig(framework string) (*Config, error) {
+	if framework != "none" && !slices.Contains(Frameworks, framework) {
 		return &Config{}, fmt.Errorf(ErrNotAllowedFramework, framework)
 	}
 
