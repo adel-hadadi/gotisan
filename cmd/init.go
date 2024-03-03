@@ -3,20 +3,30 @@ package cmd
 import (
 	"fmt"
 	"github.com/adel-hadadi/gotisan/config"
+	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
 )
 
-var framework string = ""
+const (
+	promptSelectFrameworkMsg = "Choose one of the frameworks"
+)
 
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "to initialize Gotisan config and templates",
 	Run: func(cmd *cobra.Command, args []string) {
-		wd, err := os.Getwd()
+		wd, _ := os.Getwd()
+
+		prompt := promptui.Select{
+			Label: promptSelectFrameworkMsg,
+			Items: config.AllowedFrameworks,
+		}
+
+		_, framework, err := prompt.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 			return
 		}
 
@@ -42,12 +52,5 @@ var initCmd = &cobra.Command{
 }
 
 func init() {
-	initCmd.Flags().StringVar(
-		&framework,
-		"framework",
-		"",
-		"enter framework to create handlers with framework context",
-	)
-
 	rootCmd.AddCommand(initCmd)
 }
